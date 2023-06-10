@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
-import { StatusBar } from 'expo-status-bar';
-import { ImageBackground, Text, TouchableOpacity, View } from 'react-native';
-import blurbg from './src/assets/bg-blur.png';
-import Stripes from './src/assets/stripes.svg';
-import NLWLogo from './src/assets/nlw-spacetime-logo.svg';
+import { StatusBar } from 'expo-status-bar'
+import { Text, ImageBackground, TouchableOpacity, View } from 'react-native'
+import blurbg from '../src/assets/bg-blur.png'
+import Stripes from '../src/assets/stripes.svg'
+import NLWLogo from '../src/assets/nlw-spacetime-logo.svg'
+import { useRouter } from 'expo-router'
 
 import {
   useFonts,
@@ -15,10 +16,13 @@ import {
   BaiJamjuree_700Bold
 } from '@expo-google-fonts/bai-jamjuree'
 import { styled } from 'nativewind';
+import React from 'react';
+// import React = require('react');
 
 const StyledStripes = styled(Stripes)
 
 export default function App() {
+  const router = useRouter()
 
   const [hasLoadedFonts] = useFonts({
     Roboto_400Regular,
@@ -29,6 +33,10 @@ export default function App() {
   //nao mostarr a interface até as fontes carregarem
   if(!hasLoadedFonts){
     return null
+  }
+
+  async function goMemories() {
+  router.push('/memories')
   }
 
   return (
@@ -52,6 +60,7 @@ export default function App() {
         <TouchableOpacity
           activeOpacity={0.7}
           className="rounded-full px-5 py-2 bg-orange-300 "
+          onPress={() => goMemories()}
         >
           <Text className="font-alt text-sm uppercase text-black">
             Cadastrar lembrança
